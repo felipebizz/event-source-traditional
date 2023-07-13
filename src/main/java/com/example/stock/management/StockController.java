@@ -21,7 +21,7 @@ public class StockController {
 
 		List<Stock> existingStockList = repo.findByName(stock.getName());
 
-		if (existingStockList != null && existingStockList.size() > 0) {
+		if (existingStockList != null && !existingStockList.isEmpty()) {
 
 			Stock existingStock = existingStockList.get(0);
 
@@ -35,7 +35,6 @@ public class StockController {
 
 			repo.save(stock);
 		}
-
 	}
 
 	@DeleteMapping("/stock")
@@ -52,9 +51,8 @@ public class StockController {
 			newQuantity = existingStock.getQuantity() - stock.getQuantity();
 
 			if (newQuantity <= 0) {
-				
-
 				repo.delete(existingStock);
+
 			} else {
 				existingStock.setQuantity(newQuantity);
 				existingStock.setAddedBy(stock.getAddedBy());
@@ -66,9 +64,7 @@ public class StockController {
 
 	@GetMapping("/stock")
 	public List<Stock> getStock(@RequestParam("name") String name) {
-
 		return repo.findByName(name);
-
 	}
 
 	@GetMapping("/stock/all")

@@ -9,5 +9,4 @@ class StockManagementTraditionalApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
